@@ -5,7 +5,7 @@ spring:
     password: chetan
   jpa:
     hibernate:
-      ddl-auto: update     
+      ddl-auto: update   
   output:
     ansi:
       enabled: always

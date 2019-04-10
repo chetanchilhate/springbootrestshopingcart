@@ -1,6 +1,7 @@
 package com.cj.foodstall.controller;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.cj.foodstall.model.Order;
 import com.cj.foodstall.model.User;
+import com.cj.foodstall.repositry.OrderRepositry;
 import com.cj.foodstall.repositry.UserRepositry;
 
 @RestController
@@ -21,6 +24,9 @@ public class UserController {
 
 	@Autowired
 	private UserRepositry userRepositry;
+
+	@Autowired
+	private OrderRepositry orderRepositry;
 
 	@GetMapping(value = "/user")
 	public List<User> getAllUser() {
@@ -36,6 +42,16 @@ public class UserController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+
+	@GetMapping(value = "/user/{userId}/order")
+	public List<Order> getUserOrderById(@PathVariable Integer userId) {
+		Optional<User> user = userRepositry.findById(userId);
+
+		if (user.isPresent()) {
+			return orderRepositry.findByUser(user.get());
+		}
+		return Collections.emptyList();
 	}
 
 	@PostMapping(value = "/user")

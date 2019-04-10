@@ -27,14 +27,19 @@ public class Order {
 	@JoinColumn(name = "item_id", nullable = false, foreignKey = @ForeignKey(name = "order_item_fk"))
 	private Item item;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "order_user_fk"))
+	private User user;
+
 	public Order() {
 		super();
 	}
 
-	public Order(Double quantity, Item item) {
+	public Order(Double quantity, Item item, User user) {
 		super();
 		this.quantity = quantity;
 		this.item = item;
+		this.user = user;
 	}
 
 	public Integer getOrderId() {
@@ -59,6 +64,14 @@ public class Order {
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

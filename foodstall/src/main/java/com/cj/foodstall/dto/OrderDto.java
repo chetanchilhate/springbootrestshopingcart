@@ -6,6 +6,8 @@ public class OrderDto {
 
 	private Integer itemId;
 
+	private Integer userId;
+
 	public Double getQuantity() {
 		return quantity;
 	}
@@ -20,6 +22,14 @@ public class OrderDto {
 
 	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }
